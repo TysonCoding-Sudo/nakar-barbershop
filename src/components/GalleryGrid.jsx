@@ -1,24 +1,35 @@
 import { useState } from 'react'
 
+function buildItems(folder, labels) {
+  return labels.map((label, i) => ({
+    id: `${folder}-${i}`,
+    label,
+    category: folder.toUpperCase().replace('-', ' '),
+    image: `/images/gallery/${folder}/${(i + 1).toString().padStart(2, '0')}.jpg`,
+  }))
+}
+
 const galleryItems = [
-  { id: 1, label: 'Classic Fade', category: 'HIGH FADE' },
-  { id: 2, label: 'Skin Fade', category: 'HIGH FADE' },
-  { id: 3, label: 'Bald Fade', category: 'HIGH FADE' },
-  { id: 4, label: 'Pompadour', category: 'STAY SHINING' },
-  { id: 5, label: 'Slick Back', category: 'STAY SHINING' },
-  { id: 6, label: 'Curly Top', category: 'STAY SHINING' },
-  { id: 7, label: 'Caesar Cut', category: 'CLBs' },
-  { id: 8, label: 'Box Fade', category: 'CLBs' },
-  { id: 9, label: 'Waves', category: 'CLBs' },
-  { id: 10, label: 'Bob Cut', category: 'LADIES' },
-  { id: 11, label: 'Braids', category: 'LADIES' },
-  { id: 12, label: 'Pixie Cut', category: 'LADIES' },
-  { id: 13, label: 'Kids Fade', category: 'KIDS' },
-  { id: 14, label: 'School Cut', category: 'KIDS' },
-  { id: 15, label: 'Mohawk', category: 'KIDS' },
-  { id: 16, label: 'Taper Fade', category: 'TAPER' },
-  { id: 17, label: 'Low Taper', category: 'TAPER' },
-  { id: 18, label: 'Mid Taper', category: 'TAPER' },
+  ...buildItems('high-fade', [
+    'Classic Fade', 'Skin Fade', 'Bald Fade', 'High Top', 'Drop Fade',
+    'Temple Fade', 'Shadow Fade',
+  ]),
+  ...buildItems('stay-shining', [
+    'Pompadour', 'Slick Back', 'Curly Top', 'Sponge Twist', 'Dread Styles',
+    'Cornrows', 'Silk Press',
+  ]),
+  ...buildItems('clbs', [
+    'Caesar Cut', 'Box Fade', 'Waves', '360 Waves', 'Flat Top', 'Burst Fade',
+  ]),
+  ...buildItems('ladies', [
+    'Bob Cut', 'Braids', 'Pixie Cut', 'Layered Cut', 'Faux Hawk', 'Cornrow Updo',
+  ]),
+  ...buildItems('kids', [
+    'Kids Fade', 'School Cut', 'Mohawk', 'Design Cut', 'Taper Fade', 'Buzz Cut',
+  ]),
+  ...buildItems('taper', [
+    'Taper Fade', 'Low Taper', 'Mid Taper', 'High Taper', 'Taper with Beard', 'Skin Taper',
+  ]),
 ]
 
 export default function GalleryGrid({ category = 'ALL' }) {
@@ -35,32 +46,33 @@ export default function GalleryGrid({ category = 'ALL' }) {
         return (
           <div
             key={item.id}
-            className="relative aspect-square bg-gray-100 rounded-xl overflow-hidden cursor-pointer active:scale-[0.97] transition-transform duration-150"
+            className="relative aspect-square bg-gray-100 rounded-xl overflow-hidden cursor-pointer active:scale-[0.97] transition-transform duration-150 group"
             onClick={() => setTapped(isTapped ? null : item.id)}
             onMouseEnter={() => setTapped(null)}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setTapped(isTapped ? null : item.id) }}
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
-                <span className="text-2xl">💈</span>
-              </div>
-            </div>
+            <img
+              src={item.image}
+              alt={item.label}
+              className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
+            />
             <div
-              className={`absolute inset-0 flex items-end p-4 transition-all duration-300 ${
-                isTapped ? 'bg-soft-black/40' : 'bg-soft-black/0 md:group-hover:bg-soft-black/40'
+              className={`absolute inset-0 transition-all duration-300 ${
+                isTapped ? 'bg-soft-black/50' : 'bg-soft-black/0 md:group-hover:bg-soft-black/40'
               }`}
             >
-              <span
-                className={`text-white text-sm font-medium transition-all duration-300 ${
+              <div
+                className={`absolute bottom-0 left-0 right-0 p-3 transition-all duration-300 ${
                   isTapped
                     ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0'
+                    : 'opacity-0 translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0'
                 }`}
               >
-                {item.label}
-              </span>
+                <p className="text-white text-sm font-semibold drop-shadow-sm">{item.label}</p>
+              </div>
             </div>
           </div>
         )
