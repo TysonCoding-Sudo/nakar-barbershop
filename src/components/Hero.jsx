@@ -10,18 +10,23 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-soft-black tracking-tight leading-none mb-6 glow-ambient-blue">
+          NAKAR<br />
+          <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">BARBERSHOP</span>
+        </h1>
+
         <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-line px-4 py-2 rounded-full text-sm text-muted mb-8 animate-fade-in">
           <Scissors size={14} />
           <span>Premium Barbershop — Est. 2020</span>
         </div>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-soft-black leading-[1.05] tracking-tight mb-6">
+        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-soft-black leading-[1.05] tracking-tight mb-6">
           Fresh Fades.
           <br />
           <span className="text-body">Sharp Lines.</span>
           <br />
           Clean Vibes.
-        </h1>
+        </h2>
 
         <p className="text-lg sm:text-xl text-body max-w-xl mx-auto mb-10 leading-relaxed">
           Level up your look at NAKAR. Walk in for a cut or book your appointment — either way, you're walking out fresh.

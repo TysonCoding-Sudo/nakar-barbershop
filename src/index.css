@@ -83,6 +83,26 @@ body {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
+@keyframes ambientGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 20px rgba(59, 130, 246, 0.3),
+      0 0 40px rgba(59, 130, 246, 0.15),
+      0 0 60px rgba(59, 130, 246, 0.05);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(59, 130, 246, 0.5),
+      0 0 60px rgba(59, 130, 246, 0.25),
+      0 0 80px rgba(59, 130, 246, 0.1),
+      0 0 100px rgba(59, 130, 246, 0.05);
+  }
+}
+
+.glow-ambient-blue {
+  animation: ambientGlow 3s ease-in-out infinite;
+}
+
 @media (hover: none) and (pointer: coarse) {
   .scroll-reveal,
   .scroll-reveal-left,
