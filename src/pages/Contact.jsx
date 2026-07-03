@@ -115,19 +115,41 @@ export default function Contact() {
           </div>
 
           <ScrollReveal>
-            <div className="mt-12 bg-card rounded-2xl border border-line p-5 overflow-hidden">
-              <a
-                href={mapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block aspect-[21/9] rounded-xl bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors no-underline"
-              >
-                <div className="text-center text-muted">
-                  <MapPin size={32} className="mx-auto mb-2" />
-                  <p className="text-sm font-medium">41 Nkwane Street, Mamelodi West, Pretoria, 0122</p>
-                  <p className="text-xs mt-1">Click to open in Google Maps</p>
-                </div>
-              </a>
+            <div className="mt-12 bg-card rounded-2xl border border-line overflow-hidden">
+              <div className="aspect-[21/9] w-full">
+                <iframe
+                  src="https://www.google.com/maps?q=41+Nkwane+Street+Mamelodi+West+Pretoria+0122+South+Africa&output=embed"
+                  className="w-full h-full"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="NAKAR BARBERSHOP location on Google Maps"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2 p-4">
+                <a
+                  href={mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold bg-charcoal text-white rounded-xl py-3 transition-all duration-200 hover:bg-soft-black active:scale-[0.97] no-underline min-h-[48px]"
+                >
+                  <MapPin size={16} />
+                  Open in Google Maps
+                </a>
+                <a
+                  href="https://www.google.com/maps?q=41+Nkwane+Street+Mamelodi+West+Pretoria+0122+South+Africa&layer=c"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 text-sm font-semibold text-body border border-line rounded-xl py-3 transition-all duration-200 hover:bg-gray-50 active:scale-[0.97] no-underline min-h-[48px]"
+                >
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z" />
+                    <path d="M2 12h20" />
+                  </svg>
+                  Street View
+                </a>
+              </div>
             </div>
           </ScrollReveal>
         </div>
