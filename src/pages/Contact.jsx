@@ -2,6 +2,26 @@ import ScrollReveal from '../components/ScrollReveal'
 import ContactForm from '../components/ContactForm'
 import { MapPin, Phone, Clock, Camera } from 'lucide-react'
 
+function InstagramIcon({ size = 18, className = '' }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
 const mapsUrl = 'https://www.google.com/maps?q=41+Nkwane+Street+Mamelodi+West+Pretoria+0122+South+Africa'
 
 const details = [
@@ -22,7 +42,7 @@ const details = [
   { icon: Phone, label: 'Phone', value: '071 470 5376' },
   { icon: Clock, label: 'Walk-ins', value: 'Always welcome — no appointment needed' },
   {
-    icon: Camera,
+    icon: InstagramIcon,
     label: 'Instagram',
     value: (
       <a
