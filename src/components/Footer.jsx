@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Scissors, MapPin, Phone, Clock, Camera, Video } from 'lucide-react'
 
+const mapsUrl = 'https://www.google.com/maps?q=41+Nkwane+Street+Mamelodi+West+Pretoria+0122+South+Africa'
+
 export default function Footer() {
   return (
     <footer className="bg-charcoal text-gray-300 md:pb-0">
@@ -41,11 +43,11 @@ export default function Footer() {
           <div className="flex flex-col gap-2 text-sm text-gray-400">
             <div className="flex justify-between">
               <span>Mon – Fri</span>
-              <span>9 AM – 8 PM</span>
+              <span>9 AM – 6 PM</span>
             </div>
             <div className="flex justify-between">
               <span>Saturday</span>
-              <span>9 AM – 6 PM</span>
+              <span>8 AM – 6 PM</span>
             </div>
             <div className="flex justify-between">
               <span>Sunday</span>
@@ -57,13 +59,18 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contact</h4>
           <div className="flex flex-col gap-3 text-sm text-gray-400">
-            <div className="flex items-center gap-2.5 min-h-[40px]">
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 text-gray-400 hover:text-white transition-colors no-underline min-h-[40px]"
+            >
               <MapPin size={15} />
-              <span>123 Main St, City</span>
-            </div>
-            <a href="tel:+15551234567" className="flex items-center gap-2.5 text-gray-400 hover:text-white transition-colors no-underline min-h-[40px]">
+              <span>41 Nkwane Street, Mamelodi West, Pretoria, 0122</span>
+            </a>
+            <a href="tel:+27714705376" className="flex items-center gap-2.5 text-gray-400 hover:text-white transition-colors no-underline min-h-[40px]">
               <Phone size={15} />
-              <span>(555) 123-4567</span>
+              <span>071 470 5376</span>
             </a>
             <div className="flex items-center gap-2.5 min-h-[40px]">
               <Clock size={15} />
@@ -71,7 +78,13 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex gap-3 mt-5">
-            <a href="#" className="text-gray-400 hover:text-white active:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg active:bg-gray-700/50" aria-label="Instagram">
+            <a
+              href="https://www.instagram.com/nakarbarbershop?igsh=cW8wcXU5czZqcTk1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white active:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg active:bg-gray-700/50"
+              aria-label="Instagram"
+            >
               <Camera size={20} />
             </a>
             <a href="#" className="text-gray-400 hover:text-white active:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg active:bg-gray-700/50" aria-label="YouTube">

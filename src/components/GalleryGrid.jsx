@@ -1,22 +1,36 @@
 import { useState } from 'react'
 
-const placeholders = [
-  { id: 1, label: 'Classic Fade' },
-  { id: 2, label: 'Textured Crop' },
-  { id: 3, label: 'Pompadour' },
-  { id: 4, label: 'Buzz Cut' },
-  { id: 5, label: 'Mohawk Fade' },
-  { id: 6, label: 'Line Up' },
-  { id: 7, label: 'Taper Fade' },
-  { id: 8, label: 'Curly Top' },
+const galleryItems = [
+  { id: 1, label: 'Classic Fade', category: 'HIGH FADE' },
+  { id: 2, label: 'Skin Fade', category: 'HIGH FADE' },
+  { id: 3, label: 'Bald Fade', category: 'HIGH FADE' },
+  { id: 4, label: 'Pompadour', category: 'STAY SHINING' },
+  { id: 5, label: 'Slick Back', category: 'STAY SHINING' },
+  { id: 6, label: 'Curly Top', category: 'STAY SHINING' },
+  { id: 7, label: 'Caesar Cut', category: 'CLBs' },
+  { id: 8, label: 'Box Fade', category: 'CLBs' },
+  { id: 9, label: 'Waves', category: 'CLBs' },
+  { id: 10, label: 'Bob Cut', category: 'LADIES' },
+  { id: 11, label: 'Braids', category: 'LADIES' },
+  { id: 12, label: 'Pixie Cut', category: 'LADIES' },
+  { id: 13, label: 'Kids Fade', category: 'KIDS' },
+  { id: 14, label: 'School Cut', category: 'KIDS' },
+  { id: 15, label: 'Mohawk', category: 'KIDS' },
+  { id: 16, label: 'Taper Fade', category: 'TAPER' },
+  { id: 17, label: 'Low Taper', category: 'TAPER' },
+  { id: 18, label: 'Mid Taper', category: 'TAPER' },
 ]
 
-export default function GalleryGrid() {
+export default function GalleryGrid({ category = 'ALL' }) {
   const [tapped, setTapped] = useState(null)
+
+  const filtered = category === 'ALL'
+    ? galleryItems
+    : galleryItems.filter((item) => item.category === category)
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-      {placeholders.map((item) => {
+      {filtered.map((item) => {
         const isTapped = tapped === item.id
         return (
           <div

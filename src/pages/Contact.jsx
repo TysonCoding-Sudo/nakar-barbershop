@@ -2,9 +2,24 @@ import ScrollReveal from '../components/ScrollReveal'
 import ContactForm from '../components/ContactForm'
 import { MapPin, Phone, Clock, Mail, Camera } from 'lucide-react'
 
+const mapsUrl = 'https://www.google.com/maps?q=41+Nkwane+Street+Mamelodi+West+Pretoria+0122+South+Africa'
+
 const details = [
-  { icon: MapPin, label: 'Address', value: '123 Main Street, City, State 12345' },
-  { icon: Phone, label: 'Phone', value: '(555) 123-4567' },
+  {
+    icon: MapPin,
+    label: 'Address',
+    value: (
+      <a
+        href={mapsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm font-medium text-soft-black hover:text-accent-slate transition-colors no-underline"
+      >
+        41 Nkwane Street, Mamelodi West, Pretoria, 0122
+      </a>
+    ),
+  },
+  { icon: Phone, label: 'Phone', value: '071 470 5376' },
   { icon: Clock, label: 'Walk-ins', value: 'Always welcome — no appointment needed' },
   { icon: Mail, label: 'Email', value: 'hello@nakarbarbershop.com' },
 ]
@@ -43,28 +58,43 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">{d.label}</p>
-                      <p className="text-sm font-medium text-soft-black">{d.value}</p>
+                      {typeof d.value === 'string' ? (
+                        <p className="text-sm font-medium text-soft-black">{d.value}</p>
+                      ) : (
+                        d.value
+                      )}
                     </div>
                   </div>
                 ))}
 
-                <div className="bg-charcoal rounded-2xl p-6 text-center">
+                <a
+                  href="https://www.instagram.com/nakarbarbershop?igsh=cW8wcXU5czZqcTk1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-charcoal rounded-2xl p-6 text-center no-underline hover:bg-soft-black transition-colors"
+                >
                   <Camera size={24} className="text-white mx-auto mb-3" />
                   <p className="text-white font-semibold text-lg">@nakarbarbershop</p>
                   <p className="text-gray-400 text-sm mt-1">DM us to book or ask anything</p>
-                </div>
+                </a>
               </div>
             </ScrollReveal>
           </div>
 
           <ScrollReveal>
             <div className="mt-12 bg-card rounded-2xl border border-line p-5 overflow-hidden">
-              <div className="aspect-[21/9] rounded-xl bg-gray-100 flex items-center justify-center">
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block aspect-[21/9] rounded-xl bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors no-underline"
+              >
                 <div className="text-center text-muted">
                   <MapPin size={32} className="mx-auto mb-2" />
-                  <p className="text-sm">Map placeholder — 123 Main Street</p>
+                  <p className="text-sm font-medium">41 Nkwane Street, Mamelodi West, Pretoria, 0122</p>
+                  <p className="text-xs mt-1">Click to open in Google Maps</p>
                 </div>
-              </div>
+              </a>
             </div>
           </ScrollReveal>
         </div>
