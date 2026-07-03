@@ -103,6 +103,10 @@ body {
   animation: ambientGlow 3s ease-in-out infinite;
 }
 
+body.lightbox-open {
+  overflow: hidden;
+}
+
 @media (hover: none) and (pointer: coarse) {
   .scroll-reveal,
   .scroll-reveal-left,

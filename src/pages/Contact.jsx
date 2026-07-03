@@ -1,6 +1,6 @@
 import ScrollReveal from '../components/ScrollReveal'
 import ContactForm from '../components/ContactForm'
-import { MapPin, Phone, Clock, Mail, Camera } from 'lucide-react'
+import { MapPin, Phone, Clock, Camera } from 'lucide-react'
 
 const mapsUrl = 'https://www.google.com/maps?q=41+Nkwane+Street+Mamelodi+West+Pretoria+0122+South+Africa'
 
@@ -21,7 +21,20 @@ const details = [
   },
   { icon: Phone, label: 'Phone', value: '071 470 5376' },
   { icon: Clock, label: 'Walk-ins', value: 'Always welcome — no appointment needed' },
-  { icon: Mail, label: 'Email', value: 'hello@nakarbarbershop.com' },
+  {
+    icon: Camera,
+    label: 'Instagram',
+    value: (
+      <a
+        href="https://www.instagram.com/nakarbarbershop?igsh=cW8wcXU5czZqcTk1"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-sm font-medium text-soft-black hover:text-accent-slate transition-colors no-underline"
+      >
+        @nakarbarbershop
+      </a>
+    ),
+  },
 ]
 
 export default function Contact() {
@@ -36,7 +49,7 @@ export default function Contact() {
                 Come See Us
               </h1>
               <p className="text-body max-w-lg mx-auto">
-                Drop by the shop, give us a call, or hit us up on Instagram.
+                Drop by the shop, give us a call, or DM us on Instagram.
               </p>
             </div>
           </ScrollReveal>
