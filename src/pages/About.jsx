@@ -96,6 +96,46 @@ export default function About() {
         </div>
       </section>
 
+      <section className="py-20 bg-card">
+        <div className="max-w-6xl mx-auto px-5">
+          <ScrollReveal>
+            <div className="text-center mb-10">
+              <span className="text-xs font-semibold text-muted uppercase tracking-widest">In Action</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-soft-black mt-3 mb-3">
+                NAKAR in Action
+              </h2>
+              <p className="text-body max-w-lg mx-auto">
+                See what goes down in the chair. Fresh cuts, good energy, Mams style.
+              </p>
+            </div>
+          </ScrollReveal>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {[1, 2, 3].map((n) => (
+              <ScrollReveal key={n}>
+                <div className="relative aspect-video bg-charcoal rounded-xl overflow-hidden group cursor-pointer">
+                  <video
+                    src={`/videos/gallery/gallery-video-0${n}.mp4`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    muted
+                    loop
+                    playsInline
+                    onMouseEnter={(e) => e.target.play()}
+                    onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0 }}
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-all duration-300">
+                    <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
+                      <svg viewBox="0 0 24 24" width="24" height="24" fill="#1a1b1d" className="ml-1">
+                        <polygon points="8,5 19,12 8,19" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 bg-page">
         <div className="max-w-6xl mx-auto px-5">
           <ScrollReveal>
