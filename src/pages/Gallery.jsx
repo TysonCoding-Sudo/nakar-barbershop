@@ -1,12 +1,9 @@
-import { useState } from 'react'
 import ScrollReveal from '../components/ScrollReveal'
 import GalleryGrid from '../components/GalleryGrid'
-import GalleryTabs from '../components/GalleryTabs'
-import { Camera } from 'lucide-react'
+import VideoGrid from '../components/VideoGrid'
+import { Camera, Video } from 'lucide-react'
 
 export default function Gallery() {
-  const [category, setCategory] = useState('ALL')
-
   return (
     <div className="pt-24">
       <section className="py-16 sm:py-20">
@@ -18,13 +15,26 @@ export default function Gallery() {
                 Our Work
               </h1>
               <p className="text-body max-w-lg mx-auto">
-                Browse by category and find your next look.
+                Browse our full collection of cuts and styles.
               </p>
             </div>
           </ScrollReveal>
 
-          <GalleryTabs active={category} onChange={setCategory} />
-          <GalleryGrid category={category} />
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-soft-black mb-4">
+            <Camera size={20} />
+            Photos
+          </h2>
+          <GalleryGrid />
+
+          <div className="mt-16">
+            <ScrollReveal>
+              <h2 className="flex items-center gap-2 text-lg font-semibold text-soft-black mb-4">
+                <Video size={20} />
+                Videos
+              </h2>
+            </ScrollReveal>
+            <VideoGrid />
+          </div>
 
           <ScrollReveal>
             <div className="mt-10 text-center">

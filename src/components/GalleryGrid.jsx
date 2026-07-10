@@ -1,58 +1,56 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
-function buildItems(folder, labels) {
-  return labels.map((label, i) => ({
-    id: `${folder}-${i}`,
-    label,
-    category: folder.toUpperCase().replace('-', ' '),
-    image: `/images/gallery/${folder}/${(i + 1).toString().padStart(2, '0')}.jpg`,
-  }))
-}
-
 const galleryItems = [
-  ...buildItems('high-fade', [
-    'Classic Fade', 'Skin Fade', 'Bald Fade', 'High Top', 'Drop Fade',
-    'Temple Fade', 'Shadow Fade',
-  ]),
-  ...buildItems('stay-shining', [
-    'Pompadour', 'Slick Back', 'Curly Top', 'Sponge Twist', 'Dread Styles',
-    'Cornrows', 'Silk Press',
-  ]),
-  ...buildItems('clbs', [
-    'Caesar Cut', 'Box Fade', 'Waves', '360 Waves', 'Flat Top', 'Burst Fade',
-  ]),
-  ...buildItems('ladies', [
-    'Bob Cut', 'Braids', 'Pixie Cut', 'Layered Cut', 'Faux Hawk', 'Cornrow Updo',
-  ]),
-  ...buildItems('kids', [
-    'Kids Fade', 'School Cut', 'Mohawk', 'Design Cut', 'Taper Fade', 'Buzz Cut',
-  ]),
-  ...buildItems('taper', [
-    'Taper Fade', 'Low Taper', 'Mid Taper', 'High Taper', 'Taper with Beard', 'Skin Taper',
-  ]),
+  { id: 'hf-0', label: 'Classic Fade', image: '/images/gallery/all/high-fade-01.jpg' },
+  { id: 'hf-1', label: 'Skin Fade', image: '/images/gallery/all/high-fade-02.jpg' },
+  { id: 'hf-2', label: 'Bald Fade', image: '/images/gallery/all/high-fade-03.jpg' },
+  { id: 'hf-3', label: 'High Top', image: '/images/gallery/all/high-fade-04.jpg' },
+  { id: 'hf-4', label: 'Drop Fade', image: '/images/gallery/all/high-fade-05.jpg' },
+  { id: 'hf-5', label: 'Temple Fade', image: '/images/gallery/all/high-fade-06.jpg' },
+  { id: 'hf-6', label: 'Shadow Fade', image: '/images/gallery/all/high-fade-07.jpg' },
+  { id: 'ss-0', label: 'Pompadour', image: '/images/gallery/all/stay-shining-01.jpg' },
+  { id: 'ss-1', label: 'Slick Back', image: '/images/gallery/all/stay-shining-02.jpg' },
+  { id: 'ss-2', label: 'Curly Top', image: '/images/gallery/all/stay-shining-03.jpg' },
+  { id: 'ss-3', label: 'Sponge Twist', image: '/images/gallery/all/stay-shining-04.jpg' },
+  { id: 'ss-4', label: 'Dread Styles', image: '/images/gallery/all/stay-shining-05.jpg' },
+  { id: 'ss-5', label: 'Cornrows', image: '/images/gallery/all/stay-shining-06.jpg' },
+  { id: 'ss-6', label: 'Silk Press', image: '/images/gallery/all/stay-shining-07.jpg' },
+  { id: 'cl-0', label: 'Caesar Cut', image: '/images/gallery/all/clbs-01.jpg' },
+  { id: 'cl-1', label: 'Box Fade', image: '/images/gallery/all/clbs-02.jpg' },
+  { id: 'cl-2', label: 'Waves', image: '/images/gallery/all/clbs-03.jpg' },
+  { id: 'cl-3', label: '360 Waves', image: '/images/gallery/all/clbs-04.jpg' },
+  { id: 'cl-4', label: 'Flat Top', image: '/images/gallery/all/clbs-05.jpg' },
+  { id: 'cl-5', label: 'Burst Fade', image: '/images/gallery/all/clbs-06.jpg' },
+  { id: 'la-0', label: 'Bob Cut', image: '/images/gallery/all/ladies-01.jpg' },
+  { id: 'la-1', label: 'Braids', image: '/images/gallery/all/ladies-02.jpg' },
+  { id: 'la-2', label: 'Pixie Cut', image: '/images/gallery/all/ladies-03.jpg' },
+  { id: 'la-3', label: 'Layered Cut', image: '/images/gallery/all/ladies-04.jpg' },
+  { id: 'la-4', label: 'Faux Hawk', image: '/images/gallery/all/ladies-05.jpg' },
+  { id: 'la-5', label: 'Cornrow Updo', image: '/images/gallery/all/ladies-06.jpg' },
+  { id: 'ki-0', label: 'Kids Fade', image: '/images/gallery/all/kids-01.jpg' },
+  { id: 'ki-1', label: 'School Cut', image: '/images/gallery/all/kids-02.jpg' },
+  { id: 'ki-2', label: 'Mohawk', image: '/images/gallery/all/kids-03.jpg' },
+  { id: 'ki-3', label: 'Design Cut', image: '/images/gallery/all/kids-04.jpg' },
+  { id: 'ki-4', label: 'Taper Fade', image: '/images/gallery/all/kids-05.jpg' },
+  { id: 'ki-5', label: 'Buzz Cut', image: '/images/gallery/all/kids-06.jpg' },
+  { id: 'ta-0', label: 'Taper Fade', image: '/images/gallery/all/taper-01.jpg' },
+  { id: 'ta-1', label: 'Low Taper', image: '/images/gallery/all/taper-02.jpg' },
+  { id: 'ta-2', label: 'Mid Taper', image: '/images/gallery/all/taper-03.jpg' },
+  { id: 'ta-3', label: 'High Taper', image: '/images/gallery/all/taper-04.jpg' },
+  { id: 'ta-4', label: 'Taper with Beard', image: '/images/gallery/all/taper-05.jpg' },
+  { id: 'ta-5', label: 'Skin Taper', image: '/images/gallery/all/taper-06.jpg' },
 ]
 
-export default function GalleryGrid({ category = 'ALL' }) {
+export default function GalleryGrid() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const [visible, setVisible] = useState(false)
-  const prevCategory = useRef(category)
   const touchStart = useRef(0)
 
-  const filtered = category === 'ALL'
-    ? galleryItems
-    : galleryItems.filter((item) => item.category === category)
-
   useEffect(() => {
-    if (prevCategory.current !== category) {
-      setVisible(false)
-      const timer = setTimeout(() => setVisible(true), 50)
-      prevCategory.current = category
-      return () => clearTimeout(timer)
-    } else {
-      setVisible(true)
-    }
-  }, [category])
+    const timer = setTimeout(() => setVisible(true), 50)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     if (lightboxIndex === null) return
@@ -70,10 +68,10 @@ export default function GalleryGrid({ category = 'ALL' }) {
   }, [lightboxIndex])
 
   const goTo = useCallback((i) => {
-    if (i < 0) setLightboxIndex(filtered.length - 1)
-    else if (i >= filtered.length) setLightboxIndex(0)
+    if (i < 0) setLightboxIndex(galleryItems.length - 1)
+    else if (i >= galleryItems.length) setLightboxIndex(0)
     else setLightboxIndex(i)
-  }, [filtered.length])
+  }, [])
 
   const handleTouchStart = (e) => { touchStart.current = e.touches[0].clientX }
   const handleTouchEnd = (e) => {
@@ -86,7 +84,7 @@ export default function GalleryGrid({ category = 'ALL' }) {
   return (
     <>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-        {filtered.map((item, i) => (
+        {galleryItems.map((item, i) => (
           <div
             key={item.id}
             className="relative aspect-square bg-gray-100 rounded-xl overflow-hidden cursor-pointer active:scale-[0.97] transition-all duration-300 group"
@@ -131,10 +129,10 @@ export default function GalleryGrid({ category = 'ALL' }) {
           </button>
 
           <div className="absolute top-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium">
-            {lightboxIndex + 1} / {filtered.length}
+            {lightboxIndex + 1} / {galleryItems.length}
           </div>
 
-          {filtered.length > 1 && (
+          {galleryItems.length > 1 && (
             <>
               <button
                 onClick={(e) => { e.stopPropagation(); goTo(lightboxIndex - 1) }}
@@ -158,14 +156,14 @@ export default function GalleryGrid({ category = 'ALL' }) {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={filtered[lightboxIndex].image}
-              alt={filtered[lightboxIndex].label}
+              src={galleryItems[lightboxIndex].image}
+              alt={galleryItems[lightboxIndex].label}
               className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
             />
           </div>
 
           <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 text-sm font-medium">
-            {filtered[lightboxIndex].label}
+            {galleryItems[lightboxIndex].label}
           </p>
         </div>
       )}
