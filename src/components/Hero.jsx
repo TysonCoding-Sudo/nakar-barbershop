@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Scissors, ChevronDown } from 'lucide-react'
+import LogoViewer from './LogoViewer'
 
 export default function Hero() {
+  const [viewLogo, setViewLogo] = useState(false)
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-charcoal via-page to-card">
       <div className="absolute inset-0 pointer-events-none">
@@ -26,7 +29,16 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
         <div className="mb-6 animate-fade-in">
-          <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-24 sm:h-28 md:h-32 w-auto mx-auto rounded-2xl shadow-lg shadow-black/10 object-cover" />
+          <span
+            onClick={() => setViewLogo(true)}
+            className="cursor-pointer inline-block"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setViewLogo(true) }}
+            aria-label="View logo"
+          >
+            <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-24 sm:h-28 md:h-32 w-auto mx-auto rounded-2xl shadow-lg shadow-black/10 object-cover" />
+          </span>
         </div>
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-soft-black tracking-tight leading-none mb-6 glow-ambient-blue">
           NAKAR<br />
@@ -50,18 +62,12 @@ export default function Hero() {
           Level up your look at NAKAR. Walk in for a cut or book your appointment — either way, you're walking out fresh.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex items-center justify-center">
           <Link
             to="/contact"
             className="bg-charcoal text-white text-base font-semibold px-8 py-3.5 rounded-full transition-all duration-300 hover:bg-soft-black hover:scale-105 active:scale-95 no-underline shadow-lg shadow-black/10 min-h-[48px] flex items-center justify-center"
           >
             Book Your Cut
-          </Link>
-          <Link
-            to="/services"
-            className="text-body text-base font-medium px-8 py-3.5 rounded-full border border-line transition-all duration-300 hover:bg-card hover:border-muted active:scale-[0.98] no-underline min-h-[48px] flex items-center justify-center"
-          >
-            View Services
           </Link>
         </div>
 
@@ -86,6 +92,14 @@ export default function Hero() {
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <ChevronDown size={24} className="text-muted" />
       </div>
+
+      {viewLogo && (
+        <LogoViewer
+          src="/images/nakar-logo.jpg"
+          alt="NAKAR BARBERSHOP"
+          onClose={() => setViewLogo(false)}
+        />
+      )}
     </section>
   )
 }

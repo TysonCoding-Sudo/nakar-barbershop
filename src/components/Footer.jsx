@@ -1,17 +1,31 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Scissors, MapPin, Phone, Clock, Camera, Video } from 'lucide-react'
+import { MapPin, Phone, Clock, Camera, Video } from 'lucide-react'
+import LogoViewer from './LogoViewer'
 
 const mapsUrl = 'https://www.google.com/maps?q=41+Nkwane+Street+Mamelodi+West+Pretoria+0122+South+Africa'
 
 export default function Footer() {
+  const [viewLogo, setViewLogo] = useState(false)
+
   return (
-    <footer className="bg-charcoal text-gray-300 md:pb-0">
-      <div className="max-w-6xl mx-auto px-5 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-10 w-auto rounded-lg object-cover" />
-            <span className="font-bold text-lg text-white tracking-tight">NAKAR</span>
-          </div>
+    <>
+      <footer className="bg-charcoal text-gray-300 md:pb-0">
+        <div className="max-w-6xl mx-auto px-5 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span
+                onClick={() => setViewLogo(true)}
+                className="cursor-pointer"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setViewLogo(true) }}
+                aria-label="View logo"
+              >
+                <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-10 w-auto rounded-lg object-cover" />
+              </span>
+              <span className="font-bold text-lg text-white tracking-tight">NAKAR</span>
+            </div>
           <p className="text-sm leading-relaxed text-gray-400">
             Premium barbershop serving fresh cuts, sharp lines, and clean vibes. Walk in or book ahead.
           </p>
@@ -23,7 +37,6 @@ export default function Footer() {
             {[
               { to: '/', label: 'Home' },
               { to: '/about', label: 'About' },
-              { to: '/services', label: 'Services' },
               { to: '/gallery', label: 'Gallery' },
               { to: '/contact', label: 'Contact' },
             ].map((l) => (
@@ -98,5 +111,14 @@ export default function Footer() {
         &copy; {new Date().getFullYear()} NAKAR BARBERSHOP. All rights reserved.
       </div>
     </footer>
+
+    {viewLogo && (
+      <LogoViewer
+        src="/images/nakar-logo.jpg"
+        alt="NAKAR BARBERSHOP"
+        onClose={() => setViewLogo(false)}
+      />
+    )}
+  </>
   )
 }

@@ -1,10 +1,9 @@
 import { useLocation } from 'react-router-dom'
-import { Home, User, Scissors, Image, Phone } from 'lucide-react'
+import { Home, User, Image, Phone } from 'lucide-react'
 
 const items = [
   { to: '/', icon: Home, label: 'Home' },
   { to: '/about', icon: User, label: 'About' },
-  { to: '/services', icon: Scissors, label: 'Services' },
   { to: '/gallery', icon: Image, label: 'Gallery' },
   { to: '/contact', icon: Phone, label: 'Contact' },
 ]

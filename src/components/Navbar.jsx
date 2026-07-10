@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Scissors, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
+import LogoViewer from './LogoViewer'
 
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
-  { to: '/services', label: 'Services' },
   { to: '/gallery', label: 'Gallery' },
   { to: '/contact', label: 'Contact' },
 ]
@@ -13,6 +13,7 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [viewLogo, setViewLogo] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -31,7 +32,16 @@ export default function Navbar() {
       >
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 text-soft-black no-underline min-h-[48px]">
-            <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-9 w-auto rounded-lg object-cover" />
+            <span
+              onClick={(e) => { e.stopPropagation(); e.preventDefault(); setViewLogo(true) }}
+              className="cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setViewLogo(true) } }}
+              aria-label="View logo"
+            >
+              <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-9 w-auto rounded-lg object-cover" />
+            </span>
             <span className="font-bold text-lg tracking-tight">NAKAR</span>
           </Link>
 
@@ -83,7 +93,16 @@ export default function Navbar() {
       >
         <div className="flex items-center justify-between p-5 border-b border-line">
           <div className="flex items-center gap-3">
-            <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-8 w-auto rounded-lg object-cover" />
+            <span
+              onClick={(e) => { e.stopPropagation(); setViewLogo(true) }}
+              className="cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setViewLogo(true) }}
+              aria-label="View logo"
+            >
+              <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-8 w-auto rounded-lg object-cover" />
+            </span>
             <span className="font-bold text-lg tracking-tight text-soft-black">NAKAR</span>
           </div>
           <button
@@ -122,6 +141,14 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+
+      {viewLogo && (
+        <LogoViewer
+          src="/images/nakar-logo.jpg"
+          alt="NAKAR BARBERSHOP"
+          onClose={() => setViewLogo(false)}
+        />
+      )}
     </>
   )
 }
