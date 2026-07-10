@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import ScrollReveal from '../components/ScrollReveal'
 import TeamCard from '../components/TeamCard'
+import VideoPlayerModal from '../components/VideoPlayerModal'
 import { Music, Sparkles, Users } from 'lucide-react'
 
 const team = [
@@ -9,7 +11,10 @@ const team = [
   { name: 'Luis C.', role: 'Beard & Lineup Expert' },
 ]
 
+const aboutVideos = [1, 2, 3]
+
 export default function About() {
+  const [activeVideo, setActiveVideo] = useState(null)
   return (
     <div className="pt-24">
       <section className="py-16 sm:py-24">
@@ -110,17 +115,20 @@ export default function About() {
             </div>
           </ScrollReveal>
           <div className="grid sm:grid-cols-3 gap-4">
-            {[1, 2, 3].map((n) => (
+            {aboutVideos.map((n, i) => (
               <ScrollReveal key={n}>
-                <div className="relative aspect-video bg-charcoal rounded-xl overflow-hidden group cursor-pointer">
+                <div
+                  className="relative aspect-video bg-charcoal rounded-xl overflow-hidden group cursor-pointer"
+                  onClick={() => setActiveVideo(i)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveVideo(i) }}
+                >
                   <video
                     src={`/videos/gallery/gallery-video-0${n}.mp4`}
                     className="absolute inset-0 w-full h-full object-cover"
                     muted
-                    loop
-                    playsInline
-                    onMouseEnter={(e) => e.target.play()}
-                    onMouseLeave={(e) => { e.target.pause(); e.target.currentTime = 0 }}
+                    preload="metadata"
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-all duration-300">
                     <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
@@ -133,6 +141,19 @@ export default function About() {
               </ScrollReveal>
             ))}
           </div>
+
+          {activeVideo !== null && (
+            <VideoPlayerModal
+              src={`/videos/gallery/gallery-video-0${aboutVideos[activeVideo]}.mp4`}
+              index={activeVideo}
+              total={aboutVideos.length}
+              onClose={() => setActiveVideo(null)}
+              onPrev={() => setActiveVideo((activeVideo - 1 + aboutVideos.length) % aboutVideos.length)}
+              onNext={() => setActiveVideo((activeVideo + 1) % aboutVideos.length)}
+              hasPrev={true}
+              hasNext={true}
+            />
+          )}
         </div>
       </section>
 
