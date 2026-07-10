@@ -7,6 +7,21 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gray-200/40 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-gray-200/30 rounded-full blur-3xl" />
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="hero-particle"
+            style={{
+              width: `${4 + (i % 4) * 3}px`,
+              height: `${4 + (i % 4) * 3}px`,
+              color: i % 2 === 0 ? '#9ca3af' : '#d1d5db',
+              top: `${10 + (i * 17) % 80}%`,
+              left: `${5 + (i * 13) % 90}%`,
+              animation: `${i % 2 === 0 ? 'float' : 'float-delayed'} ${6 + (i % 3) * 3}s ease-in-out infinite`,
+              animationDelay: `${i * 1.2}s`,
+            }}
+          />
+        ))}
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">

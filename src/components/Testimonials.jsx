@@ -23,15 +23,17 @@ const testimonials = [
 export default function Testimonials() {
   const [current, setCurrent] = useState(0)
   const [dragging, setDragging] = useState(false)
+  const [paused, setPaused] = useState(false)
   const dragStart = useRef(0)
   const dragEnd = useRef(0)
 
   useEffect(() => {
+    if (paused) return
     const timer = setInterval(() => {
       if (!dragging) setCurrent((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
+    }, 4000)
     return () => clearInterval(timer)
-  }, [dragging])
+  }, [dragging, paused])
 
   const goTo = (i) => setCurrent((i + testimonials.length) % testimonials.length)
   const prev = () => goTo(current - 1)
@@ -53,7 +55,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <div className="max-w-3xl mx-auto px-5 text-center">
         <span className="text-xs font-semibold text-muted uppercase tracking-widest">Testimonials</span>
         <h2 className="text-3xl sm:text-4xl font-bold text-soft-black mt-3 mb-12">

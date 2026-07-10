@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Hero from '../components/Hero'
 import Testimonials from '../components/Testimonials'
 import ScrollReveal from '../components/ScrollReveal'
+import AnimatedCounter from '../components/AnimatedCounter'
 import { Scissors, Sparkles, User } from 'lucide-react'
 
 const features = [
@@ -66,13 +67,15 @@ export default function Home() {
           </ScrollReveal>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             {[
-              { num: '5,000+', label: 'Cuts Done' },
-              { num: '4.9', label: 'Avg Rating' },
-              { num: '8+', label: 'Years Open' },
-              { num: '50+', label: 'Styles Mastered' },
+              { target: 5000, suffix: '+', label: 'Cuts Done' },
+              { target: 9, suffix: '', decimals: 0, prefix: '4.', label: 'Avg Rating' },
+              { target: 8, suffix: '+', label: 'Years Open' },
+              { target: 50, suffix: '+', label: 'Styles Mastered' },
             ].map((s, i) => (
               <ScrollReveal key={i}>
-                <div className="text-3xl sm:text-4xl font-bold text-soft-black">{s.num}</div>
+                <div className="text-3xl sm:text-4xl font-bold text-soft-black">
+                  <AnimatedCounter target={s.target} suffix={s.suffix} decimals={s.decimals || 0} prefix={s.prefix || ''} />
+                </div>
                 <div className="text-sm text-muted mt-1">{s.label}</div>
               </ScrollReveal>
             ))}

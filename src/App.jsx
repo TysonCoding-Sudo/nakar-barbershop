@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import MobileBottomNav from './components/MobileBottomNav'
 import StickyBookBar from './components/StickyBookBar'
+import BackToTop from './components/BackToTop'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         </Routes>
       </main>
+      <BackToTop />
       <StickyBookBar />
       <MobileBottomNav />
       <Footer />

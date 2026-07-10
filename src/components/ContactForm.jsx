@@ -12,6 +12,13 @@ export default function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!form.name || !form.email || !form.message) return
+
+    if (/\d/.test(form.message)) {
+      const text = encodeURIComponent(`Hi, my name is ${form.name} (${form.email}). ${form.message}`)
+      window.open(`https://wa.me/27714705376?text=${text}`, '_blank')
+      return
+    }
+
     setSent(true)
     setTimeout(() => {
       setSent(false)
