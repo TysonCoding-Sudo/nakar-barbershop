@@ -25,6 +25,9 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
+        <div className="mb-6 animate-fade-in">
+          <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-24 sm:h-28 md:h-32 w-auto mx-auto rounded-2xl shadow-lg shadow-black/10 object-cover" />
+        </div>
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-soft-black tracking-tight leading-none mb-6 glow-ambient-blue">
           NAKAR<br />
           <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">BARBERSHOP</span>

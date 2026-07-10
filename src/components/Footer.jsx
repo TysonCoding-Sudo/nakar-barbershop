@@ -8,8 +8,8 @@ export default function Footer() {
     <footer className="bg-charcoal text-gray-300 md:pb-0">
       <div className="max-w-6xl mx-auto px-5 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <Scissors size={20} className="text-gray-400" />
+          <div className="flex items-center gap-3 mb-4">
+            <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-10 w-auto rounded-lg object-cover" />
             <span className="font-bold text-lg text-white tracking-tight">NAKAR</span>
           </div>
           <p className="text-sm leading-relaxed text-gray-400">

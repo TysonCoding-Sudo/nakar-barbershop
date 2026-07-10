@@ -2,14 +2,14 @@
 
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --color-page: #f5f7fa;
+  --color-page: #f4f3f0;
   --color-card: #ffffff;
-  --color-soft-black: #1a1a1a;
-  --color-body: #4a4f5a;
-  --color-muted: #7c8390;
-  --color-line: #e2e6ec;
-  --color-charcoal: #2d333a;
-  --color-accent-slate: #5a6577;
+  --color-soft-black: #1a1b1d;
+  --color-body: #5a5856;
+  --color-muted: #8f8c88;
+  --color-line: #d6d3d0;
+  --color-charcoal: #202227;
+  --color-accent-slate: #87676c;
 }
 
 html {

@@ -30,8 +30,8 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-soft-black no-underline min-h-[48px]">
-            <Scissors size={22} className="text-accent-slate" />
+          <Link to="/" className="flex items-center gap-3 text-soft-black no-underline min-h-[48px]">
+            <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-9 w-auto rounded-lg object-cover" />
             <span className="font-bold text-lg tracking-tight">NAKAR</span>
           </Link>
 
@@ -82,7 +82,10 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center justify-between p-5 border-b border-line">
-          <span className="font-bold text-lg tracking-tight text-soft-black">NAKAR</span>
+          <div className="flex items-center gap-3">
+            <img src="/images/nakar-logo.jpg" alt="NAKAR BARBERSHOP" className="h-8 w-auto rounded-lg object-cover" />
+            <span className="font-bold text-lg tracking-tight text-soft-black">NAKAR</span>
+          </div>
           <button
             className="min-w-[48px] min-h-[48px] flex items-center justify-center text-soft-black cursor-pointer active:scale-95 transition-transform"
             onClick={() => setOpen(false)}
