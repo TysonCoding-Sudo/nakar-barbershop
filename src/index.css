@@ -2,13 +2,13 @@
 
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --color-page: #f4f3f0;
-  --color-card: #ffffff;
-  --color-soft-black: #1a1b1d;
-  --color-body: #5a5856;
-  --color-muted: #8f8c88;
-  --color-line: #d6d3d0;
-  --color-charcoal: #202227;
+  --color-page: #23262a;
+  --color-card: #2e3136;
+  --color-soft-black: #eceae7;
+  --color-body: #b8b5b1;
+  --color-muted: #7c7975;
+  --color-line: #3c3f44;
+  --color-charcoal: #1a1c20;
   --color-accent-slate: #87676c;
 }
 
@@ -27,12 +27,12 @@ body {
 }
 
 ::selection {
-  background-color: #d1d5db;
-  color: #1a1a1a;
+  background-color: #87676c;
+  color: #eceae7;
 }
 
 *:focus-visible {
-  outline: 2px solid #5a6577;
+  outline: 2px solid #87676c;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -126,6 +126,7 @@ body.lightbox-open {
   border-radius: 50%;
   background: currentColor;
   pointer-events: none;
+  opacity: 0.5;
 }
 
 @keyframes countUp {

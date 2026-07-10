@@ -37,7 +37,7 @@ export default function Services() {
             ))}
           </div>
           <ScrollReveal>
-            <div className="mt-12 text-center bg-white rounded-2xl border border-line p-8">
+            <div className="mt-12 text-center bg-card rounded-2xl border border-line p-8">
               <p className="text-sm text-muted mb-2">
                 Prices may vary based on hair length and complexity.
               </p>

@@ -25,7 +25,7 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/80 backdrop-blur-lg shadow-sm'
+            ? 'bg-charcoal/90 backdrop-blur-lg shadow-sm shadow-black/20'
             : 'bg-transparent'
         }`}
       >
@@ -43,8 +43,8 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 no-underline min-h-[48px] flex items-center ${
                     isActive
-                      ? 'text-soft-black bg-gray-100'
-                      : 'text-muted hover:text-soft-black hover:bg-gray-50'
+                      ? 'text-soft-black bg-white/10'
+                      : 'text-muted hover:text-soft-black hover:bg-white/5'
                   }`
                 }
               >
@@ -77,7 +77,7 @@ export default function Navbar() {
       />
 
       <div
-        className={`fixed top-0 right-0 bottom-0 w-72 bg-white z-70 shadow-xl flex flex-col transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 bottom-0 w-72 bg-card z-70 shadow-xl shadow-black/40 flex flex-col transition-transform duration-300 md:hidden ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -103,8 +103,8 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `text-base font-medium py-3.5 px-4 rounded-lg transition-colors duration-200 no-underline min-h-[48px] flex items-center ${
                   isActive
-                    ? 'bg-gray-100 text-soft-black'
-                    : 'text-body hover:bg-gray-50 hover:text-soft-black active:bg-gray-100'
+                    ? 'bg-white/10 text-soft-black'
+                    : 'text-body hover:bg-white/5 hover:text-soft-black active:bg-white/10'
                 }`
               }
             >

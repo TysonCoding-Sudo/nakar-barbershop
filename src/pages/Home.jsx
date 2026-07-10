@@ -45,7 +45,7 @@ export default function Home() {
             {features.map((f, i) => (
               <ScrollReveal key={i}>
                 <div className="bg-card rounded-2xl border border-line p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5 active:scale-[0.98]">
-                  <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-5">
+                  <div className="w-14 h-14 rounded-2xl bg-charcoal flex items-center justify-center mx-auto mb-5">
                     <f.icon size={26} className="text-accent-slate" />
                   </div>
                   <h3 className="text-xl font-bold text-soft-black mb-3">{f.title}</h3>
@@ -57,7 +57,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-card">
         <div className="max-w-4xl mx-auto px-5 text-center">
           <ScrollReveal>
             <span className="text-xs font-semibold text-muted uppercase tracking-widest">NAKAR in Numbers</span>

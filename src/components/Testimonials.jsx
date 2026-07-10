@@ -55,7 +55,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-20 bg-white" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <section className="py-20 bg-card" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <div className="max-w-3xl mx-auto px-5 text-center">
         <span className="text-xs font-semibold text-muted uppercase tracking-widest">Testimonials</span>
         <h2 className="text-3xl sm:text-4xl font-bold text-soft-black mt-3 mb-12">
@@ -63,7 +63,7 @@ export default function Testimonials() {
         </h2>
 
         <div className="relative select-none">
-          <Quote size={32} className="text-gray-200 mx-auto mb-6" />
+          <Quote size={32} className="text-muted/30 mx-auto mb-6" />
 
           <div
             className="overflow-hidden touch-pan-y"

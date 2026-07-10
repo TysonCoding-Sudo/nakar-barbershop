@@ -31,7 +31,7 @@ export default function ServiceCard({ icon: Icon, title, description, price, dur
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center mb-5 group-hover:bg-charcoal transition-colors duration-300">
+      <div className="w-12 h-12 rounded-xl bg-charcoal flex items-center justify-center mb-5 group-hover:bg-soft-black transition-colors duration-300">
         {Icon && <Icon size={22} className="text-accent-slate group-hover:text-white transition-colors duration-300" />}
       </div>
       <h3 className="text-lg font-bold text-soft-black mb-2">{title}</h3>

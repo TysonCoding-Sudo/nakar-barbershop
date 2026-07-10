@@ -3,10 +3,10 @@ import { Scissors, ChevronDown } from 'lucide-react'
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-page via-white to-gray-100">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-charcoal via-page to-card">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gray-200/40 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gray-200/30 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-accent-slate/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-slate/10 rounded-full blur-3xl" />
         {[...Array(12)].map((_, i) => (
           <div
             key={i}
@@ -14,7 +14,7 @@ export default function Hero() {
             style={{
               width: `${4 + (i % 4) * 3}px`,
               height: `${4 + (i % 4) * 3}px`,
-              color: i % 2 === 0 ? '#9ca3af' : '#d1d5db',
+              color: i % 2 === 0 ? '#87676c' : '#b8b5b1',
               top: `${10 + (i * 17) % 80}%`,
               left: `${5 + (i * 13) % 90}%`,
               animation: `${i % 2 === 0 ? 'float' : 'float-delayed'} ${6 + (i % 3) * 3}s ease-in-out infinite`,
@@ -33,7 +33,7 @@ export default function Hero() {
           <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">BARBERSHOP</span>
         </h1>
 
-        <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-line px-4 py-2 rounded-full text-sm text-muted mb-8 animate-fade-in">
+        <div className="inline-flex items-center gap-2 bg-card/70 backdrop-blur-sm border border-line px-4 py-2 rounded-full text-sm text-muted mb-8 animate-fade-in">
           <Scissors size={14} />
           <span>Premium Barbershop — Est. 2020</span>
         </div>
@@ -59,7 +59,7 @@ export default function Hero() {
           </Link>
           <Link
             to="/services"
-            className="text-body text-base font-medium px-8 py-3.5 rounded-full border border-line transition-all duration-300 hover:bg-white hover:border-muted active:bg-gray-50 active:scale-[0.98] no-underline min-h-[48px] flex items-center justify-center"
+            className="text-body text-base font-medium px-8 py-3.5 rounded-full border border-line transition-all duration-300 hover:bg-card hover:border-muted active:scale-[0.98] no-underline min-h-[48px] flex items-center justify-center"
           >
             View Services
           </Link>

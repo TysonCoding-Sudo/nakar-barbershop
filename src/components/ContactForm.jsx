@@ -39,7 +39,7 @@ export default function ContactForm() {
           value={form.name}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3.5 rounded-xl border border-line bg-white text-soft-black text-sm outline-none transition-all duration-200 focus:border-muted focus:ring-2 focus:ring-gray-200/50 min-h-[48px]"
+          className="w-full px-4 py-3.5 rounded-xl border border-line bg-card text-soft-black text-sm outline-none transition-all duration-200 focus:border-muted focus:ring-2 focus:ring-white/10 min-h-[48px]"
           placeholder="Enter your name"
         />
       </div>
@@ -54,7 +54,7 @@ export default function ContactForm() {
           value={form.email}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3.5 rounded-xl border border-line bg-white text-soft-black text-sm outline-none transition-all duration-200 focus:border-muted focus:ring-2 focus:ring-gray-200/50 min-h-[48px]"
+          className="w-full px-4 py-3.5 rounded-xl border border-line bg-card text-soft-black text-sm outline-none transition-all duration-200 focus:border-muted focus:ring-2 focus:ring-white/10 min-h-[48px]"
           placeholder="your@email.com"
         />
       </div>
@@ -69,7 +69,7 @@ export default function ContactForm() {
           value={form.message}
           onChange={handleChange}
           required
-          className="w-full px-4 py-3.5 rounded-xl border border-line bg-white text-soft-black text-sm outline-none transition-all duration-200 focus:border-muted focus:ring-2 focus:ring-gray-200/50 resize-none"
+          className="w-full px-4 py-3.5 rounded-xl border border-line bg-card text-soft-black text-sm outline-none transition-all duration-200 focus:border-muted focus:ring-2 focus:ring-white/10 resize-none"
           placeholder="Tell us what you need..."
         />
       </div>

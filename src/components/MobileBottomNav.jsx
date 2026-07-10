@@ -13,7 +13,7 @@ export default function MobileBottomNav() {
   const { pathname } = useLocation()
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-t border-line safe-area-bottom">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur-lg border-t border-line safe-area-bottom">
       <div className="flex items-center justify-around h-14">
         {items.map((item) => {
           const isActive = pathname === item.to

@@ -86,7 +86,7 @@ export default function Contact() {
               <div className="space-y-5">
                 {details.map((d, i) => (
                   <div key={i} className="bg-card rounded-2xl border border-line p-5 flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
+                    <div className="w-11 h-11 rounded-xl bg-charcoal flex items-center justify-center shrink-0">
                       <d.icon size={18} className="text-accent-slate" />
                     </div>
                     <div>

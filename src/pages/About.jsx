@@ -50,7 +50,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-card">
         <div className="max-w-6xl mx-auto px-5">
           <ScrollReveal>
             <div className="text-center mb-14">
