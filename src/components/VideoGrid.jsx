@@ -38,7 +38,7 @@ export default function VideoGrid() {
         {videoItems.map((item, i) => (
           <div
             key={item.id}
-            className="relative aspect-square bg-charcoal rounded-xl overflow-hidden cursor-pointer active:scale-[0.97] transition-all duration-300 group"
+            className="relative aspect-square bg-charcoal rounded-xl overflow-hidden cursor-pointer active:scale-[0.97] transition-all duration-300 group touch-manipulation"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.95)',
@@ -55,7 +55,7 @@ export default function VideoGrid() {
               muted
               preload="metadata"
             />
-            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
               <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
                 <Play size={24} className="text-soft-black ml-1" />
               </div>

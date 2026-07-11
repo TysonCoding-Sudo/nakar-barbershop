@@ -61,7 +61,7 @@ export default function GalleryGrid() {
         {galleryItems.map((item, i) => (
           <div
             key={item.id}
-            className="relative aspect-square bg-charcoal rounded-xl overflow-hidden cursor-pointer active:scale-[0.97] transition-all duration-300 group"
+            className="relative aspect-square bg-charcoal rounded-xl overflow-hidden cursor-pointer active:scale-[0.97] transition-all duration-300 group touch-manipulation"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.95)',
@@ -78,7 +78,7 @@ export default function GalleryGrid() {
               className="absolute inset-0 w-full h-full object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-soft-black/0 md:group-hover:bg-soft-black/40 transition-all duration-300">
+            <div className="absolute inset-0 bg-soft-black/0 md:group-hover:bg-soft-black/40 transition-all duration-300 pointer-events-none">
               <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 translate-y-3 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300">
                 <p className="text-white text-sm font-semibold drop-shadow-sm">{item.label}</p>
               </div>

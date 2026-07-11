@@ -2,6 +2,7 @@ import { useEffect, useCallback, useRef } from 'react'
 
 export default function ImageViewerModal({ images, currentIndex, onClose, onChangeIndex }) {
   const touchStart = useRef(0)
+  const touchMoved = useRef(false)
 
   const goTo = useCallback((i) => {
     if (i < 0) onChangeIndex(images.length - 1)
@@ -24,13 +25,18 @@ export default function ImageViewerModal({ images, currentIndex, onClose, onChan
   }, [onClose, currentIndex, goTo])
 
   const handleBgClick = useCallback((e) => {
+    if (touchMoved.current) { touchMoved.current = false; return }
     if (e.target === e.currentTarget) onClose()
   }, [onClose])
 
-  const handleTouchStart = (e) => { touchStart.current = e.touches[0].clientX }
+  const handleTouchStart = (e) => {
+    touchMoved.current = false
+    touchStart.current = e.touches[0].clientX
+  }
   const handleTouchEnd = (e) => {
     const diff = touchStart.current - e.changedTouches[0].clientX
     if (Math.abs(diff) > 50) {
+      touchMoved.current = true
       if (diff > 0) goTo(currentIndex + 1)
       else goTo(currentIndex - 1)
     }
