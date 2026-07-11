@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import ImageViewerModal from './ImageViewerModal'
 
 const galleryItems = [
   { id: 'hf-0', label: 'Classic Fade', image: '/images/gallery/all/high-fade-01.jpg' },
@@ -45,41 +45,15 @@ const galleryItems = [
 export default function GalleryGrid() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const [visible, setVisible] = useState(false)
-  const touchStart = useRef(0)
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 50)
     return () => clearTimeout(timer)
   }, [])
 
-  useEffect(() => {
-    if (lightboxIndex === null) return
-    const handleKey = (e) => {
-      if (e.key === 'Escape') setLightboxIndex(null)
-      if (e.key === 'ArrowLeft') goTo(lightboxIndex - 1)
-      if (e.key === 'ArrowRight') goTo(lightboxIndex + 1)
-    }
-    document.addEventListener('keydown', handleKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', handleKey)
-      document.body.style.overflow = ''
-    }
-  }, [lightboxIndex])
-
-  const goTo = useCallback((i) => {
-    if (i < 0) setLightboxIndex(galleryItems.length - 1)
-    else if (i >= galleryItems.length) setLightboxIndex(0)
-    else setLightboxIndex(i)
+  const handleChangeIndex = useCallback((i) => {
+    setLightboxIndex(i)
   }, [])
-
-  const handleTouchStart = (e) => { touchStart.current = e.touches[0].clientX }
-  const handleTouchEnd = (e) => {
-    const diff = touchStart.current - e.changedTouches[0].clientX
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? goTo(lightboxIndex + 1) : goTo(lightboxIndex - 1)
-    }
-  }
 
   return (
     <>
@@ -114,58 +88,12 @@ export default function GalleryGrid() {
       </div>
 
       {lightboxIndex !== null && (
-        <div
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center animate-fade-in"
-          onClick={() => setLightboxIndex(null)}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          <button
-            onClick={() => setLightboxIndex(null)}
-            className="absolute top-4 right-4 min-w-[48px] min-h-[48px] flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer z-10"
-            aria-label="Close"
-          >
-            <X size={28} />
-          </button>
-
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium">
-            {lightboxIndex + 1} / {galleryItems.length}
-          </div>
-
-          {galleryItems.length > 1 && (
-            <>
-              <button
-                onClick={(e) => { e.stopPropagation(); goTo(lightboxIndex - 1) }}
-                className="absolute left-2 sm:left-4 min-w-[48px] min-h-[48px] flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer z-10"
-                aria-label="Previous"
-              >
-                <ChevronLeft size={36} />
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); goTo(lightboxIndex + 1) }}
-                className="absolute right-2 sm:right-4 min-w-[48px] min-h-[48px] flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer z-10"
-                aria-label="Next"
-              >
-                <ChevronRight size={36} />
-              </button>
-            </>
-          )}
-
-          <div
-            className="max-h-[85vh] max-w-[90vw] flex items-center justify-center p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={galleryItems[lightboxIndex].image}
-              alt={galleryItems[lightboxIndex].label}
-              className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
-            />
-          </div>
-
-          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 text-sm font-medium">
-            {galleryItems[lightboxIndex].label}
-          </p>
-        </div>
+        <ImageViewerModal
+          images={galleryItems}
+          currentIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+          onChangeIndex={handleChangeIndex}
+        />
       )}
     </>
   )

@@ -4,7 +4,6 @@ import 'plyr/dist/plyr.css'
 
 export default function VideoPlayerModal({ src, onClose, onPrev, onNext, hasPrev, hasNext, index, total }) {
   const playerRef = useRef(null)
-  const plyrRef = useRef(null)
 
   useEffect(() => {
     if (!playerRef.current) return
@@ -18,7 +17,6 @@ export default function VideoPlayerModal({ src, onClose, onPrev, onNext, hasPrev
       keyboard: { focused: true, global: true },
       tooltips: { controls: true, seek: true },
     })
-    plyrRef.current = player
     return () => { player.destroy() }
   }, [src])
 
@@ -84,12 +82,16 @@ export default function VideoPlayerModal({ src, onClose, onPrev, onNext, hasPrev
           </button>
         )}
 
-        <div className="w-full max-w-4xl mx-auto" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="flex items-center justify-center max-h-[85vh] w-full"
+          onClick={(e) => e.stopPropagation()}
+        >
           <video
             ref={playerRef}
             src={src}
-            className="w-full rounded-lg shadow-2xl"
+            className="max-h-[85vh] w-auto max-w-full rounded-lg shadow-2xl"
             playsInline
+            webkit-playsinline
           />
         </div>
       </div>
