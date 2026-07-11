@@ -177,10 +177,26 @@ export default function MediaViewer({ items, currentIndex, onClose, onChangeInde
         </div>
       </div>
 
-      <div className="flex justify-center pb-4 shrink-0">
+      <div className="flex flex-col items-center pb-4 shrink-0 gap-1.5">
         <p className="text-white/70 text-sm font-medium">
           {item.label}
         </p>
+        {item.insta && (
+          <a
+            href={item.insta}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white text-xs font-medium cursor-pointer no-underline"
+          >
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+            @nakarbarbershop
+          </a>
+        )}
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ import { Scissors, MapPin, Clock, Camera, Globe } from 'lucide-react'
 import MediaViewer from './MediaViewer'
 
 const logoItem = [
-  { type: 'image', src: '/images/nakar-logo.jpg', label: 'NAKAR BARBERSHOP' },
+  { type: 'image', src: '/images/nakar-logo.jpg', label: 'NAKAR BARBERSHOP', insta: 'https://www.instagram.com/nakarbarbershop?igsh=cW8wcXU5czZqcTk1' },
 ]
 
 export default function Footer() {
