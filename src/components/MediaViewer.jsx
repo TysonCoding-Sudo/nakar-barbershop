@@ -1,14 +1,69 @@
 import { useEffect, useCallback, useRef } from 'react'
 
-export default function ImageViewerModal({ images, currentIndex, onClose, onChangeIndex }) {
+export default function MediaViewer({ items, currentIndex, onClose, onChangeIndex }) {
+  const containerRef = useRef(null)
+  const videoRef = useRef(null)
   const touchStart = useRef(0)
   const touchMoved = useRef(false)
 
+  const item = items[currentIndex]
+
   const goTo = useCallback((i) => {
-    if (i < 0) onChangeIndex(images.length - 1)
-    else if (i >= images.length) onChangeIndex(0)
+    if (i < 0) onChangeIndex(items.length - 1)
+    else if (i >= items.length) onChangeIndex(0)
     else onChangeIndex(i)
-  }, [images.length, onChangeIndex])
+  }, [items.length, onChangeIndex])
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+
+    let cancelled = false
+
+    const enterFullscreen = async () => {
+      try {
+        if (el.requestFullscreen) await el.requestFullscreen()
+        else if (el.webkitRequestFullscreen) await el.webkitRequestFullscreen()
+      } catch {} 
+    }
+
+    const lockOrientation = async () => {
+      try {
+        if (screen.orientation?.lock) await screen.orientation.lock('portrait-primary')
+      } catch {} 
+    }
+
+    enterFullscreen()
+    lockOrientation()
+
+    const handleChange = () => {
+      if (cancelled) return
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        onClose()
+      }
+    }
+
+    document.addEventListener('fullscreenchange', handleChange)
+    document.addEventListener('webkitfullscreenchange', handleChange)
+
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      cancelled = true
+      document.removeEventListener('fullscreenchange', handleChange)
+      document.removeEventListener('webkitfullscreenchange', handleChange)
+      document.body.style.overflow = ''
+
+      try {
+        if (document.fullscreenElement || document.webkitFullscreenElement) {
+          if (document.exitFullscreen) document.exitFullscreen()
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen()
+        }
+      } catch {} 
+
+      try { if (screen.orientation?.unlock) screen.orientation.unlock() } catch {}
+    }
+  }, [onClose])
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -17,12 +72,18 @@ export default function ImageViewerModal({ images, currentIndex, onClose, onChan
       if (e.key === 'ArrowRight') goTo(currentIndex + 1)
     }
     document.addEventListener('keydown', handleKey)
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', handleKey)
-      document.body.style.overflow = ''
-    }
+    return () => document.removeEventListener('keydown', handleKey)
   }, [onClose, currentIndex, goTo])
+
+  useEffect(() => {
+    const el = videoRef.current
+    if (el && item.type === 'video') {
+      el.play().catch(() => {})
+    }
+    return () => {
+      if (el && item.type === 'video') el.pause()
+    }
+  }, [currentIndex, item.type])
 
   const handleBgClick = useCallback((e) => {
     if (touchMoved.current) { touchMoved.current = false; return }
@@ -33,6 +94,7 @@ export default function ImageViewerModal({ images, currentIndex, onClose, onChan
     touchMoved.current = false
     touchStart.current = e.touches[0].clientX
   }
+
   const handleTouchEnd = (e) => {
     const diff = touchStart.current - e.changedTouches[0].clientX
     if (Math.abs(diff) > 50) {
@@ -44,14 +106,15 @@ export default function ImageViewerModal({ images, currentIndex, onClose, onChan
 
   return (
     <div
-      className="fixed inset-0 z-[100] bg-black/95 flex flex-col animate-fade-in"
+      ref={containerRef}
+      className="fixed inset-0 z-[100] bg-black flex flex-col"
       onClick={handleBgClick}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       <div className="flex items-center justify-between px-4 sm:px-6 py-3 shrink-0">
         <div className="text-white/60 text-sm font-medium">
-          {currentIndex + 1} / {images.length}
+          {currentIndex + 1} / {items.length}
         </div>
         <button
           onClick={onClose}
@@ -64,8 +127,8 @@ export default function ImageViewerModal({ images, currentIndex, onClose, onChan
         </button>
       </div>
 
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-8 py-2 relative">
-        {images.length > 1 && (
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-8 py-2 relative min-h-0">
+        {items.length > 1 && (
           <>
             <button
               onClick={(e) => { e.stopPropagation(); goTo(currentIndex - 1) }}
@@ -89,21 +152,34 @@ export default function ImageViewerModal({ images, currentIndex, onClose, onChan
         )}
 
         <div
-          className="flex items-center justify-center max-h-[85vh]"
+          className="flex items-center justify-center max-h-full w-full"
           onClick={(e) => e.stopPropagation()}
         >
-          <img
-            src={images[currentIndex].image}
-            alt={images[currentIndex].label}
-            className="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl select-none"
-            draggable={false}
-          />
+          {item.type === 'video' ? (
+            <video
+              ref={videoRef}
+              src={item.src}
+              className="max-h-[85vh] w-auto max-w-full rounded-lg shadow-2xl"
+              controls
+              autoPlay
+              muted
+              playsInline
+              webkit-playsinline
+            />
+          ) : (
+            <img
+              src={item.src}
+              alt={item.label}
+              className="max-h-[85vh] max-w-full object-contain rounded-lg shadow-2xl select-none"
+              draggable={false}
+            />
+          )}
         </div>
       </div>
 
       <div className="flex justify-center pb-4 shrink-0">
         <p className="text-white/70 text-sm font-medium">
-          {images[currentIndex].label}
+          {item.label}
         </p>
       </div>
     </div>

@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Scissors, ChevronDown } from 'lucide-react'
-import LogoViewer from './LogoViewer'
+import MediaViewer from './MediaViewer'
+
+const logoItem = [
+  { type: 'image', src: '/images/nakar-logo.jpg', label: 'NAKAR BARBERSHOP' },
+]
 
 export default function Hero() {
   const [viewLogo, setViewLogo] = useState(false)
@@ -94,10 +98,11 @@ export default function Hero() {
       </div>
 
       {viewLogo && (
-        <LogoViewer
-          src="/images/nakar-logo.jpg"
-          alt="NAKAR BARBERSHOP"
+        <MediaViewer
+          items={logoItem}
+          currentIndex={0}
           onClose={() => setViewLogo(false)}
+          onChangeIndex={() => {}}
         />
       )}
     </section>

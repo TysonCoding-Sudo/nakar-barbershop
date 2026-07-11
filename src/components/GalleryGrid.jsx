@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import ImageViewerModal from './ImageViewerModal'
+import MediaViewer from './MediaViewer'
 
 const galleryItems = [
   { id: 'hf-0', label: 'Classic Fade', image: '/images/gallery/all/high-fade-01.jpg' },
@@ -41,6 +41,13 @@ const galleryItems = [
   { id: 'ta-4', label: 'Taper with Beard', image: '/images/gallery/all/taper-05.jpg' },
   { id: 'ta-5', label: 'Skin Taper', image: '/images/gallery/all/taper-06.jpg' },
 ]
+
+const mediaItems = galleryItems.map((item) => ({
+  type: 'image',
+  src: item.image,
+  label: item.label,
+  id: item.id,
+}))
 
 export default function GalleryGrid() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
@@ -88,8 +95,8 @@ export default function GalleryGrid() {
       </div>
 
       {lightboxIndex !== null && (
-        <ImageViewerModal
-          images={galleryItems}
+        <MediaViewer
+          items={mediaItems}
           currentIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
           onChangeIndex={handleChangeIndex}

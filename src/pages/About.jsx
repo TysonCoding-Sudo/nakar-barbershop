@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ScrollReveal from '../components/ScrollReveal'
 import TeamCard from '../components/TeamCard'
-import VideoPlayerModal from '../components/VideoPlayerModal'
+import MediaViewer from '../components/MediaViewer'
 import { Music, Sparkles, Users } from 'lucide-react'
 
 const team = [
@@ -12,6 +12,11 @@ const team = [
 ]
 
 const aboutVideos = [1, 2, 3]
+const aboutMediaItems = aboutVideos.map((n) => ({
+  type: 'video',
+  src: `/videos/gallery/gallery-video-0${n}.mp4`,
+  label: `NAKAR in Action ${n}`,
+}))
 
 export default function About() {
   const [activeVideo, setActiveVideo] = useState(null)
@@ -143,15 +148,11 @@ export default function About() {
           </div>
 
           {activeVideo !== null && (
-            <VideoPlayerModal
-              src={`/videos/gallery/gallery-video-0${aboutVideos[activeVideo]}.mp4`}
-              index={activeVideo}
-              total={aboutVideos.length}
+            <MediaViewer
+              items={aboutMediaItems}
+              currentIndex={activeVideo}
               onClose={() => setActiveVideo(null)}
-              onPrev={() => setActiveVideo((activeVideo - 1 + aboutVideos.length) % aboutVideos.length)}
-              onNext={() => setActiveVideo((activeVideo + 1) % aboutVideos.length)}
-              hasPrev={true}
-              hasNext={true}
+              onChangeIndex={(i) => setActiveVideo(i)}
             />
           )}
         </div>

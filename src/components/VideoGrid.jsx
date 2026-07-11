@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { Play } from 'lucide-react'
-import VideoPlayerModal from './VideoPlayerModal'
+import { useState, useEffect, useCallback } from 'react'
+import MediaViewer from './MediaViewer'
 
 const videoItems = Array.from({ length: 8 }, (_, i) => ({
   id: `vid-${i}`,
@@ -8,29 +7,25 @@ const videoItems = Array.from({ length: 8 }, (_, i) => ({
   video: `/videos/gallery/gallery-video-${(i + 1).toString().padStart(2, '0')}.mp4`,
 }))
 
+const mediaItems = videoItems.map((item) => ({
+  type: 'video',
+  src: item.video,
+  label: item.label,
+  id: item.id,
+}))
+
 export default function VideoGrid() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
   const [visible, setVisible] = useState(false)
-  const touchStart = useRef(0)
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 50)
     return () => clearTimeout(timer)
   }, [])
 
-  const goTo = useCallback((i) => {
-    if (i < 0) setLightboxIndex(videoItems.length - 1)
-    else if (i >= videoItems.length) setLightboxIndex(0)
-    else setLightboxIndex(i)
+  const handleChangeIndex = useCallback((i) => {
+    setLightboxIndex(i)
   }, [])
-
-  const handleTouchStart = (e) => { touchStart.current = e.touches[0].clientX }
-  const handleTouchEnd = (e) => {
-    const diff = touchStart.current - e.changedTouches[0].clientX
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? goTo(lightboxIndex + 1) : goTo(lightboxIndex - 1)
-    }
-  }
 
   return (
     <>
@@ -57,7 +52,9 @@ export default function VideoGrid() {
             />
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
               <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-transform duration-200 group-hover:scale-110">
-                <Play size={24} className="text-soft-black ml-1" />
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="#1a1b1d" className="ml-1">
+                  <polygon points="8,5 19,12 8,19" />
+                </svg>
               </div>
             </div>
           </div>
@@ -65,15 +62,11 @@ export default function VideoGrid() {
       </div>
 
       {lightboxIndex !== null && (
-        <VideoPlayerModal
-          src={videoItems[lightboxIndex].video}
-          index={lightboxIndex}
-          total={videoItems.length}
+        <MediaViewer
+          items={mediaItems}
+          currentIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
-          onPrev={() => goTo(lightboxIndex - 1)}
-          onNext={() => goTo(lightboxIndex + 1)}
-          hasPrev={true}
-          hasNext={true}
+          onChangeIndex={handleChangeIndex}
         />
       )}
     </>
